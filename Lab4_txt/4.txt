@@ -1,0 +1,29 @@
+from collections import deque
+dec = deque([])
+for i in range(32):  #fill dec
+    dec.append(chr(ord("а") + i))
+#print(dec)
+
+def find_letter (c):
+    while dec[-1] != c:
+        dec.appendleft(dec.pop())
+
+file = open('Lab4_txt/2.txt', encoding='utf-8')
+text = ''
+prev_text = ''
+for line in file:
+    for symb in line:
+        prev_text += symb
+        if symb >= 'а' and symb <= 'я':
+            find_letter(symb)
+            text += dec[1]
+        else:
+            text += symb
+file.close()      
+
+file = open('Lab4_txt/2_ans.txt', 'w', encoding='utf-8')
+file.write(text)
+file.close()           )(
+
+print(prev_text)
+print(text)
